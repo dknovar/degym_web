@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Timetable;
+use \App\timetable;
 use \App\User;
 
 class JadwalController extends Controller
@@ -16,7 +16,7 @@ class JadwalController extends Controller
     public function index()
     {
         $halaman ='jadwal';
-        $jadwal=Timetable::all();
+        $jadwal=timetable::all();
         $jumlah_jadwal=$jadwal->count();
         return view('jadwal', compact('halaman','jadwal','jumlah_jadwal'));
     }
