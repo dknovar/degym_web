@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use \App\timetable;
 use \App\day_timetable;
@@ -63,13 +63,13 @@ class JadwalController extends Controller
                 $gambar_name    = "Jadwal_Image".date('YmdHis').".$ext";
                 $upload_path    = 'gambarUpload';
                 $request->file('gambar_jadwal')->move($upload_path,$gambar_name);
-                $input['gambar_jadwal']    = $gambar_name;
+                $input['image_det_timetable']    = $gambar_name;
             }
         }
         
         $det_timetable = new det_timetable;
         $det_timetable->day_timetable_id = $request->hari;
-        $det_timetable->image_det_timetable  = $input['gambar_jadwal'];
+        $det_timetable->image_det_timetable  = $input['image_det_timetable'];
         $det_timetable->save();
 
         $today = Carbon::now();
@@ -91,6 +91,14 @@ class JadwalController extends Controller
     public function show($id)
     {
         //
+        $halaman='jadwal';
+        // $det_jadwal=timetable::findOrFail($id);
+        $det_jadwal = DB::table('timetable') ->select( 'timetable.id', 'day_timetable.day_timetable as hari', 'det_timetable.image_det_timetable as gambar') 
+        ->leftJoin('det_timetable', 'timetable.det_timetable_id', '=', 'det_timetable.id') 
+        ->leftJoin('day_timetable', 'det_timetable.day_timetable_id', '=', 'day_timetable.id') 
+        ->where('timetable.id', '=', $id)->first();
+        // dd($det_jadwal);
+        return view('jadwal.show', compact('halaman','det_jadwal'));
     }
 
     /**

@@ -37,9 +37,9 @@
                         <td>{{$item->timetable_month}}</td>
                         <td>{{$item->timetable_year}}</td>
                         <td>
-                          <a href="{{ url('class/'.$item->id)}}"><button class="btn btn-primary">Detail</button></a>
-                          <a href="{{ url('class/'.$item->id.'/edit')}}"><button class="btn btn-success">Edit</button></a>
-                          <form action="{{url('class/'.$item->id)}}" method="post" class="d-inline">
+                          <a href="{{ url('jadwal/'.$item->id)}}"><button class="btn btn-primary">Detail</button></a>
+                          <a href="{{ url('jadwal/'.$item->id.'/edit')}}"><button class="btn btn-success">Edit</button></a>
+                          <form action="{{url('jadwal/'.$item->id)}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
                               <button type="submit" class="btn btn-danger">Delete</button>

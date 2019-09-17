@@ -9,8 +9,7 @@ class det_timetable extends Model
     //
     protected $table ='det_timetable';
     protected $fillable =['day_timetable_id',
-                        'image_det_timetable',
-                    ];
+                        'image_det_timetable'];
 
     public function timetable(){
         return $this->hasMany('App\Timetable', 'det_timetable_id');
