@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\timetable;
-<<<<<<< HEAD
 use \App\day_timetable;
 use \App\det_timetable;
-=======
->>>>>>> 82a19daa05559192ac61bc0f64a924c96ed191f3
 use \App\User;
-
+use Carbon\Carbon;
 class JadwalController extends Controller
 {
     /**
@@ -58,28 +55,31 @@ class JadwalController extends Controller
         //
         $input=$request->all();
 
-        if ($request->hasFile('gambar')){
-            $gambar =$request->file('gambar');
+        if ($request->hasFile('gambar_jadwal')){
+            $gambar =$request->file('gambar_jadwal');
             $ext    =$gambar->getClientOriginalExtension();
 
-            if ($request->file('gambar')->isValid()){
+            if ($request->file('gambar_jadwal')->isValid()){
                 $gambar_name    = "Jadwal_Image".date('YmdHis').".$ext";
                 $upload_path    = 'gambarUpload';
-                $request->file('gambar')->move($upload_path,$gambar_name);
-                $input['image_det_timetable']    = $gambar_name;
+                $request->file('gambar_jadwal')->move($upload_path,$gambar_name);
+                $input['gambar_jadwal']    = $gambar_name;
             }
         }
         
         $det_timetable = new det_timetable;
         $det_timetable->day_timetable_id = $request->hari;
-        $det_timetable->image_det_timetable  = $input['image_det_timetable'];
-        $class->save();
+        $det_timetable->image_det_timetable  = $input['gambar_jadwal'];
+        $det_timetable->save();
 
-        $class->user_id= $request->user()->id;
-        $class->class_name  = $request->nama_class;
-
-        $class->save();
-        return redirect('class')->with('status','Data Jadwal Berhasil Ditambahkan!');
+        $today = Carbon::now();
+        $timetable = new timetable;
+        $timetable->user_id= $request->user()->id;
+        $timetable->det_timetable_id= $det_timetable->id;
+        $timetable->timetable_month  =$today->now();
+        $timetable->timetable_year  = $today->year;
+        $timetable->save();
+        return redirect('jadwal')->with('status','Data Jadwal Berhasil Ditambahkan!');
     }
 
     /**

@@ -32,14 +32,11 @@
                           <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                         </div>
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="gambar" name="gambar">
-                            <label class="custom-file-label" for="gambar_class">Pilih Gambar</label>
+                          <input type="file" class="custom-file-input" id="gambar_jadwal" name="gambar_jadwal">
+                            <label class="custom-file-label" for="gambar_jadwal">Pilih Gambar</label>
                         </div>
                       </div>
-                    <!-- {{-- <div class="form-group">
-                            <label for="gambar_class" class="control-label">Gambar</label>
-                            <input type="text" name="gambar" id="gambar" class="form-control">
-                    </div> --}} -->
+                    
                     <div>
                         <input type="submit" value="Tambah Jadwal" class="btn btn-primary form-control mt-3">
                     </div>
@@ -47,4 +44,11 @@
            </div>
         </div>
     </div>
+<script>
+$("#datepicker").datepicker( {
+    format: "mm-yyyy",
+    viewMode: "months", 
+    minViewMode: "months"
+});
+</script>
 @endsection

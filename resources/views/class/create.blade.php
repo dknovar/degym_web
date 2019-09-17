@@ -31,10 +31,7 @@
                             <label class="custom-file-label" for="gambar_class">Choose file</label>
                         </div>
                       </div>
-                    {{-- <div class="form-group">
-                            <label for="gambar_class" class="control-label">Gambar</label>
-                            <input type="text" name="gambar" id="gambar" class="form-control">
-                    </div> --}}
+
                     <div>
                         <input type="submit" value="Tambah Class" class="btn btn-primary form-control mt-3">
                     </div>
