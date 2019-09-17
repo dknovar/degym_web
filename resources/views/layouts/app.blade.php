@@ -114,5 +114,12 @@
             @yield('content')
         </main>
     </div>
+    <script>
+    $("#datepicker").datepicker( {
+    format: "mm-yyyy",
+    viewMode: "months", 
+    minViewMode: "months"
+    });
+    </script>
 </body>
 </html>

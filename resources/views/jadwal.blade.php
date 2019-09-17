@@ -3,18 +3,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-10">
+            <!-- <div class="col-10">
                 <h3>halaman jadwal</h3>
-            </div>
-            <div>
-                <a href="timetable"><button class="btn btn-success">TimeTable</button></a>
-                <a href="det_timetable"><button class="btn btn-success">Detail TimeTable</button></a>
-                <a href="day_timetable"><button class="btn btn-success">Day TimeTable</button></a>
-            </div>
+            </div> -->
+            
         </div>
         <div class="row">
             <div class="col-10">
-                <a href="{{url('/class/create')}}"><button class="btn btn-primary">Tambah Jadwal</button></a>
+                <a href="{{url('/jadwal/create')}}"><button class="btn btn-primary">Tambah Jadwal</button></a>
             </div>
             @if (session('status'))
                 <div class="alert alert-success">
@@ -27,8 +23,7 @@
                       <th scope="col">No</th>
                       <th scope="col">ID Jadwal</th>
                       <th scope="col">User</th>
-                      <th scope="col">id detail jadwal</th>
-                      <th scope="col">Tanggal</th>
+                      <th scope="col">Bulan</th>
                       <th scope="col">Tahun</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -39,7 +34,6 @@
                       <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$item->id}}</td>
                         <td>{{$item->user->name}}</td>
-                        <td>{{$item->det_timetable_id}}</td>
                         <td>{{$item->timetable_month}}</td>
                         <td>{{$item->timetable_year}}</td>
                         <td>

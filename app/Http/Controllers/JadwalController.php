@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Timetable;
+use \App\timetable;
+use \App\day_timetable;
+use \App\det_timetable;
 use \App\User;
 
 class JadwalController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +27,7 @@ class JadwalController extends Controller
     public function index()
     {
         $halaman ='jadwal';
-        $jadwal=Timetable::all();
+        $jadwal=timetable::all();
         $jumlah_jadwal=$jadwal->count();
         return view('jadwal', compact('halaman','jadwal','jumlah_jadwal'));
     }
@@ -29,6 +40,8 @@ class JadwalController extends Controller
     public function create()
     {
         //
+        $day_list = day_timetable::pluck('day_timetable','id');
+        return view('jadwal.create',compact('day_list'));
     }
 
     /**
@@ -40,6 +53,30 @@ class JadwalController extends Controller
     public function store(Request $request)
     {
         //
+        $input=$request->all();
+
+        if ($request->hasFile('gambar')){
+            $gambar =$request->file('gambar');
+            $ext    =$gambar->getClientOriginalExtension();
+
+            if ($request->file('gambar')->isValid()){
+                $gambar_name    = "Jadwal_Image".date('YmdHis').".$ext";
+                $upload_path    = 'gambarUpload';
+                $request->file('gambar')->move($upload_path,$gambar_name);
+                $input['image_det_timetable']    = $gambar_name;
+            }
+        }
+        
+        $det_timetable = new det_timetable;
+        $det_timetable->day_timetable_id = $request->hari;
+        $det_timetable->image_det_timetable  = $input['image_det_timetable'];
+        $class->save();
+
+        $class->user_id= $request->user()->id;
+        $class->class_name  = $request->nama_class;
+
+        $class->save();
+        return redirect('class')->with('status','Data Jadwal Berhasil Ditambahkan!');
     }
 
     /**

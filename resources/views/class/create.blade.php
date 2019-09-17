@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-10">
-                <h1 class="mt-2">Create Class!</h1>
-                <h3>halaman class</h3>
+                <h1 class="mt-2">Create New Class!</h1>
+                <!-- <h3>halaman class</h3> -->
             </div>
            <div>
                 <form action="/class" method="POST" enctype="multipart/form-data">
