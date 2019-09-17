@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\timetable;
+<<<<<<< HEAD
 use \App\day_timetable;
 use \App\det_timetable;
+=======
+>>>>>>> 82a19daa05559192ac61bc0f64a924c96ed191f3
 use \App\User;
 
 class JadwalController extends Controller
