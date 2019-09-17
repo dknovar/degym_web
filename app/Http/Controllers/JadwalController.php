@@ -133,5 +133,8 @@ class JadwalController extends Controller
     public function destroy($id)
     {
         //
+        // timetable::destroy($id);
+        det_timetable::destroy($id);
+        return redirect('jadwal')->with('status','Data Jadwal Berhasil Dihapus!');
     }
 }

@@ -39,7 +39,7 @@
                         <td>
                           <a href="{{ url('jadwal/'.$item->id)}}"><button class="btn btn-primary">Detail</button></a>
                           <a href="{{ url('jadwal/'.$item->id.'/edit')}}"><button class="btn btn-success">Edit</button></a>
-                          <form action="{{url('jadwal/'.$item->id)}}" method="post" class="d-inline">
+                          <form action="{{url('jadwal/'.$item->det_timetable_id)}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
                               <button type="submit" class="btn btn-danger">Delete</button>
